@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.2, user-scalable=yes, viewport-fit=cover">
+  <title>С Днём Рождения, Кристина | Нежная открытка</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,500&family=Great+Vibes&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Montserrat', 'Cormorant Garamond', serif;
+      background: #fce4ec;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 16px;
+      background-image: radial-gradient(circle at 30% 40%, #fff0f5 5%, #f8bbd0 70%);
+      background-attachment: fixed;
+      overflow-x: hidden;
+    }
+
+    .bg-particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 220, 230, 0.7) 0%, transparent 70%);
+      animation: particleFloat 8s infinite ease-in-out;
+      will-change: transform, opacity;
+    }
+
+    @keyframes particleFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+      25% { transform: translate(20px, -30px) scale(1.3); opacity: 0.7; }
+      50% { transform: translate(-15px, -10px) scale(0.9); opacity: 0.5; }
+      75% { transform: translate(10px, -40px) scale(1.1); opacity: 0.6; }
+    }
+
+    .book {
+      width: 100%;
+      max-width: 520px;
+      height: auto;
+      min-height: 750px;
+      max-height: 92vh;
+      background: rgba(255, 245, 250, 0.65);
+      backdrop-filter: blur(20px);
+      border-radius: 48px 48px 40px 40px;
+      box-shadow: 0 30px 50px rgba(180, 100, 120, 0.25), 0 10px 20px rgba(200, 140, 160, 0.3);
+      position: relative;
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.7);
+      display: flex;
+      flex-direction: column;
+      z-index: 1;
+      animation: bookAppear 1.2s cubic-bezier(0.23, 1, 0.32, 1), borderGlow 5s infinite alternate;
+    }
+
+    @keyframes bookAppear {
+      0% { opacity: 0; transform: scale(0.9) translateY(30px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    @keyframes borderGlow {
+      0% { border-color: rgba(255, 220, 230, 0.6); }
+      50% { border-color: rgba(255, 180, 200, 0.9); }
+      100% { border-color: rgba(255, 220, 230, 0.6); }
+    }
+
+    .pages-container {
+      position: relative;
+      flex: 1;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .page {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 40px 28px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      text-align: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1), visibility 0.8s, transform 0.6s ease;
+      transform: translateY(20px) scale(0.97);
+      background: transparent;
+      color: #4a2c3b;
+      overflow-y: auto;
+      pointer-events: none;
+      border-radius: 40px;
+      will-change: transform, opacity;
+    }
+
+    .page.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+      z-index: 10;
+      background: rgba(255, 248, 250, 0.45);
+      backdrop-filter: blur(8px);
+      animation: pageGlow 0.8s ease-out;
+    }
+
+    @keyframes pageGlow {
+      0% { box-shadow: inset 0 0 0px rgba(255, 200, 210, 0); }
+      50% { box-shadow: inset 0 0 60px rgba(255, 200, 210, 0.3); }
+      100% { box-shadow: inset 0 0 0px rgba(255, 200, 210, 0); }
+    }
+
+    .soft-bg {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.3;
+      pointer-events: none;
+      background: radial-gradient(ellipse at 20% 30%, #ffd1dc 5%, transparent 30%),
+                  radial-gradient(circle at 80% 70%, #ffe4e1 10%, transparent 40%),
+                  radial-gradient(circle at 40% 80%, #fbc2c2 8%, transparent 35%);
+      filter: blur(3px);
+      animation: bgBreathe 6s infinite ease-in-out;
+    }
+
+    @keyframes bgBreathe {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.45; }
+    }
+
+    .golden-spark {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle, rgba(255,215,0,0.4) 0%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(8px);
+      animation: floatSpark 6s infinite alternate ease-in-out;
+      pointer-events: none;
+      will-change: transform, opacity;
+    }
+
+    @keyframes floatSpark {
+      0% { transform: translate(0, 0) scale(0.9); opacity: 0.4; }
+      100% { transform: translate(20px, -25px) scale(1.3); opacity: 0.8; }
+    }
+
+    .twinkle-star {
+      position: absolute;
+      pointer-events: none;
+      z-index: 5;
+      animation: twinkle 2.5s infinite alternate ease-in-out;
+      will-change: transform, opacity;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.3; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1.3); }
+    }
+
+    .sway {
+      animation: sway 5s infinite ease-in-out;
+    }
+
+    @keyframes sway {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(2deg); }
+      75% { transform: rotate(-2deg); }
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 4.2rem;
+      font-weight: 400;
+      color: #b3446c;
+      text-shadow: 2px 2px 8px rgba(255, 240, 245, 0.9);
+      line-height: 1.2;
+      margin-bottom: 8px;
+      animation: titleShine 3s infinite alternate;
+    }
+
+    @keyframes titleShine {
+      0% { text-shadow: 2px 2px 8px rgba(255, 240, 245, 0.9); }
+      100% { text-shadow: 2px 2px 22px rgba(255, 180, 200, 1), 0 0 35px rgba(255, 200, 210, 0.5); }
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 500;
+      font-size: 2.2rem;
+      color: #9b4b6b;
+      letter-spacing: 1px;
+      margin: 8px 0;
+      line-height: 1.3;
+    }
+
+    .cat-girl-badge {
+      background: rgba(255, 240, 245, 0.8);
+      border: 1px solid #ebb1c1;
+      border-radius: 40px;
+      padding: 10px 24px;
+      margin: 12px 0;
+      font-style: italic;
+      color: #aa4a6a;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 6px 12px rgba(200, 120, 140, 0.2);
+      font-size: 1rem;
+      transition: all 0.4s ease;
+    }
+
+    .cat-girl-badge:hover {
+      box-shadow: 0 8px 22px rgba(200, 120, 140, 0.4);
+      transform: translateY(-3px);
+    }
+
+    .quote-block {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-style: italic;
+      color: #4e2e3a;
+      line-height: 1.5;
+      padding: 16px 22px;
+      border-left: 4px solid #d89fb4;
+      background: linear-gradient(to right, rgba(255,255,250,0.8), transparent);
+      margin: 16px 0;
+      transition: all 0.4s ease;
+      max-width: 380px;
+    }
+
+    .quote-block:hover {
+      border-left-color: #b3446c;
+      background: linear-gradient(to right, rgba(255,245,248,0.9), rgba(255,240,245,0.3));
+      transform: translateX(4px);
+    }
+
+    .gaby-reference {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      color: #be5f7c;
+    }
+
+    button, .nav-dot, .nav-arrow {
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .nav-arrows {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      transform: translateY(-50%);
+      display: flex;
+      justify-content: space-between;
+      padding: 0 10px;
+      pointer-events: none;
+      z-index: 30;
+    }
+
+    .nav-arrow {
+      background: rgba(255, 240, 245, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: #b3446c;
+      box-shadow: 0 6px 14px rgba(180, 100, 130, 0.3);
+      pointer-events: auto;
+      transition: all 0.3s ease;
+      user-select: none;
+      animation: arrowPulse 3s infinite ease-in-out;
+    }
+
+    @keyframes arrowPulse {
+      0%, 100% { box-shadow: 0 6px 14px rgba(180, 100, 130, 0.3); }
+      50% { box-shadow: 0 6px 24px rgba(180, 100, 130, 0.55); }
+    }
+
+    .nav-arrow:hover {
+      background: rgba(255, 220, 230, 0.9);
+      transform: scale(1.08);
+    }
+
+    .nav-arrow:active {
+      background: rgba(255, 200, 215, 0.95);
+      transform: scale(0.92);
+    }
+
+    .nav-dots {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      padding: 18px 0 14px;
+      z-index: 20;
+      background: rgba(255, 245, 250, 0.4);
+      backdrop-filter: blur(10px);
+      border-radius: 0 0 40px 40px;
+    }
+
+    .nav-dot {
+      width: 13px;
+      height: 13px;
+      background: #f3c6d4;
+      border-radius: 50%;
+      border: 2px solid white;
+      box-shadow: 0 2px 6px rgba(180, 100, 130, 0.4);
+      transition: all 0.4s ease;
+    }
+
+    .nav-dot.active {
+      background: #d4648b;
+      transform: scale(1.5);
+      box-shadow: 0 0 18px #f8a5c2;
+      animation: dotGlow 2s infinite alternate;
+    }
+
+    @keyframes dotGlow {
+      0% { box-shadow: 0 0 10px #f8a5c2; }
+      100% { box-shadow: 0 0 22px #ff8faa; }
+    }
+
+    .tulip-icon {
+      font-size: 2rem;
+      filter: drop-shadow(0 4px 4px rgba(255, 220, 220, 0.7));
+      margin: 4px;
+      transition: transform 0.3s ease;
+    }
+
+    .tulip-icon:hover {
+      transform: scale(1.2) rotate(-10deg);
+    }
+
+    .hover-glow {
+      transition: all 0.4s ease;
+    }
+
+    .hover-glow:hover {
+      text-shadow: 0 0 18px #ffb7c5;
+      transform: scale(1.03);
+    }
+
+    .reveal-quote {
+      background: rgba(255, 255, 255, 0.55);
+      padding: 12px 22px;
+      border-radius: 30px;
+      cursor: pointer;
+      border: 1px dashed #c48b9f;
+      margin: 14px 0;
+      font-size: 0.95rem;
+      transition: all 0.4s ease;
+    }
+
+    .reveal-quote:hover {
+      background: rgba(255, 255, 255, 0.8);
+      border-color: #b3446c;
+    }
+
+    .hidden-message {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.7s ease, opacity 0.5s, margin 0.5s;
+      font-style: italic;
+      color: #882b4c;
+      font-size: 1.05rem;
+    }
+
+    .reveal-quote:hover .hidden-message,
+    .reveal-quote.touched .hidden-message {
+      max-height: 150px;
+      opacity: 1;
+      margin-top: 12px;
+    }
+
+    .photo-placeholder {
+      width: 140px;
+      height: 140px;
+      min-height: 140px;
+      border-radius: 50%;
+      background: rgba(255, 235, 240, 0.8);
+      border: 3px dashed #d89fb4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 16px auto;
+      box-shadow: 0 12px 24px rgba(180, 100, 120, 0.25);
+      backdrop-filter: blur(6px);
+      font-size: 0.85rem;
+      color: #b47b8c;
+      text-align: center;
+      line-height: 1.3;
+      transition: all 0.5s ease;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+      animation: photoFloat 6s infinite ease-in-out;
+      will-change: transform;
+    }
+
+    @keyframes photoFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    .photo-placeholder img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      display: none;
+      z-index: 2;
+    }
+
+    .photo-placeholder.has-photo {
+      border: 3px solid #d89fb4;
+      background: transparent;
+      animation: photoFloat 6s infinite ease-in-out, photoGlow 4s infinite alternate;
+    }
+
+    @keyframes photoGlow {
+      0% { box-shadow: 0 12px 24px rgba(180, 100, 120, 0.25); }
+      100% { box-shadow: 0 12px 38px rgba(200, 120, 150, 0.5); }
+    }
+
+    .photo-placeholder.has-photo img {
+      display: block;
+    }
+
+    .photo-placeholder.has-photo .placeholder-text {
+      display: none;
+    }
+
+    .placeholder-text {
+      padding: 10px;
+      font-style: italic;
+      z-index: 1;
+    }
+
+    .page::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .page::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .page::-webkit-scrollbar-thumb {
+      background: rgba(200, 140, 160, 0.4);
+      border-radius: 10px;
+    }
+
+    @media (max-width: 450px) {
+      .page {
+        padding: 30px 18px 40px;
+      }
+      h1 {
+        font-size: 3.2rem;
+      }
+      h2 {
+        font-size: 1.8rem;
+      }
+      .nav-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 1.5rem;
+      }
+      .photo-placeholder {
+        width: 110px;
+        height: 110px;
+        min-height: 110px;
+      }
+      .quote-block {
+        font-size: 1.3rem;
+        padding: 12px 16px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .book {
+        max-width: 550px;
+        min-height: 800px;
+      }
+      .page {
+        padding: 50px 36px 60px;
+      }
+      h1 {
+        font-size: 4.8rem;
+      }
+      h2 {
+        font-size: 2.6rem;
+      }
+      .photo-placeholder {
+        width: 160px;
+        height: 160px;
+        min-height: 160px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="book">
+    <div class="pages-container" id="pagesContainer">
+      <!-- СТРАНИЦА 1: Обложка -->
+      <div class="page active" data-index="0">
+        <div class="soft-bg"></div>
+        <div class="golden-spark" style="top:8%; left:8%;"></div>
+        <span class="twinkle-star" style="top:12%; right:15%;">✨</span>
+        <span class="twinkle-star" style="bottom:20%; left:12%;">🌟</span>
+        <span class="tulip-icon sway">🌷</span>
+        <h1>С Днем Рождения, Кристин!</h1>
+        <div style="font-size: 1.2rem; color: #b05a7a; margin: 5px 0;">— Нежной, как белый тюльпан —</div>
+        <div class="cat-girl-badge">
+          🐈‍⬛ Самая любимая девочка ✨
+        </div>
+        <!-- Фото 1: Обложка -->
+        <div class="photo-placeholder" id="photo1">
+          <span class="placeholder-text">✨<br>твоё фото<br>здесь</span>
+          <img src="" alt="Фото Кристины">
+        </div>
+        <p style="color: #7b4b5a; margin-top: 14px; font-style: italic; font-size: 1rem;">
+          Ты — как любимый сериал: <br>глубокая, яркая и настоящая
+        </p>
+        <div style="margin-top: 20px; font-size: 0.9rem; letter-spacing: 2px; color: #b98b9b;">листай →</div>
+        <span class="twinkle-star" style="bottom:10%; right:18%;">💫</span>
+      </div>
+
+      <!-- СТРАНИЦА 2: Персональное поздравление + Кристина кошка -->
+      <div class="page" data-index="1">
+        <div class="soft-bg"></div>
+        <div class="golden-spark" style="top:65%; right:3%;"></div>
+        <span class="twinkle-star" style="top:8%; left:12%;">✨</span>
+        <h2>🌸 Кристина,<br>ты — особенное чудо</h2>
+        <div style="display: flex; align-items: center; gap: 12px; margin: 14px 0;">
+          <span style="font-size: 1.5rem;">🐱</span>
+          <span class="cat-girl-badge" style="margin:0;">Кристина — девушка-кошка</span>
+          <span style="font-size: 1.5rem;">📚</span>
+        </div>
+        <p style="max-width: 360px; color: #583444; line-height: 1.9; font-size: 1rem; margin: 8px 0;">
+          В тебе столько тепла, что хватило бы на целый мир. Твоя улыбка, глаза — обворожительны. Ты делаешь жизнь красивее просто тем, что ты есть. С тобой хочется просто быть, ты настоящая и энергичная.
+        </p>
+        <div class="reveal-quote" id="secretMessage">
+          <span>🎀 Нажми, чтобы открыть секрет 🎀</span>
+          <div class="hidden-message">
+            "Ты вдохновляешь так же, как Габи Солис — смело, красиво и с душой. Только у тебя ещё и сердце огромное."
+          </div>
+        </div>
+        <div style="margin-top: 12px; font-size: 1.5rem;">✨</div>
+      </div>
+
+      <!-- СТРАНИЦА 3: Цитата из Отчаянных домохозяек (Линнет) -->
+      <div class="page" data-index="2">
+        <div class="soft-bg"></div>
+        <span class="twinkle-star" style="top:10%; right:20%;">🕊️</span>
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+          <span style="font-size: 2rem;">🕊️</span>
+          <span class="gaby-reference" style="font-size: 1.1rem;">Будь самой счастливой</span>
+          <span style="font-size: 2rem;">🕯️</span>
+        </div>
+        <div class="quote-block">
+          "Хорошие отношения — это когда легко вместе молчать"
+        </div>
+        <p style="font-size: 0.9rem; color: #885a6e; margin-top: 6px;">
+          — Линнет
+        </p>
+        <!-- Фото 2: Страница с цитатой Линнет -->
+        <div class="photo-placeholder" id="photo2">
+          <span class="placeholder-text">🤍<br>фото<br>с тобой</span>
+          <img src="" alt="Фото">
+        </div>
+        <div style="margin: 14px 0; display: flex; gap: 14px; align-items: center;">
+          <span class="tulip-icon">🌷</span>
+          <span style="font-family: 'Great Vibes'; font-size: 2rem; color: #be738b;">Ты знаешь, чего хочешь</span>
+          <span class="tulip-icon">🌷</span>
+        </div>
+        <span class="twinkle-star" style="bottom:15%; left:10%;">💫</span>
+      </div>
+
+      <!-- СТРАНИЦА 4: Литературная цитата о любви -->
+      <div class="page" data-index="3">
+        <div class="soft-bg"></div>
+        <span class="twinkle-star" style="top:12%; left:18%;">📖</span>
+        <div style="font-size: 2.5rem; margin-bottom: 8px;">📖✨</div>
+        <div class="quote-block" style="border-left-color: #e3a9be;">
+          "Любовь — это значит видеть человека таким, каким его задумал Бог."
+        </div>
+        <p style="color: #7f5365; font-size: 0.95rem; margin-top: 6px;">— Фёдор Михайлович Достоевский</p>
+        <!-- Фото 3: Страница с литературной цитатой -->
+        <div class="photo-placeholder" id="photo3">
+          <span class="placeholder-text">📖<br>фото<br>любви</span>
+          <img src="" alt="Фото любви">
+        </div>
+        <div style="margin: 20px 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; font-size: 1.1rem;">
+          <span>🤍</span>
+          <span class="hover-glow">Ты — воплощение всего того лучшего, что есть на свете</span>
+          <span>🤍</span>
+        </div>
+        <p style="font-style: italic; max-width: 340px; color: #5c3b48; line-height: 1.9; font-size: 1rem;">
+          Кристина, ты умеешь делать так, что мир вокруг становится светлее. И это видно каждому, кто тебя знает.
+        </p>
+      </div>
+
+      <!-- СТРАНИЦА 5: Завершающая страница с пожеланиями -->
+      <div class="page" data-index="4">
+        <div class="soft-bg"></div>
+        <div class="golden-spark" style="bottom:12%; left:12%;"></div>
+        <span class="twinkle-star" style="top:8%; right:12%;">🌟</span>
+        <h2>Я хочу тебе пожелать</h2>
+        <div style="margin: 16px 0; display: flex; gap: 10px; align-items: center;">
+          <span class="tulip-icon">🌷</span>
+          <span style="font-weight: 300; font-size: 1.3rem;">Самый красивый букет тюльпанов</span>
+          <span class="tulip-icon">🌷</span>
+        </div>
+        <p style="background: rgba(255,250,250,0.7); padding: 20px 22px; border-radius: 28px; line-height: 1.9; max-width: 380px; font-size: 1rem;">
+          Пусть каждый твой день будет похож на любимый сериал — с моментами счастья, верными людьми рядом и красивыми нарядами. Оставайся такой же женственной, как Габи, такой же уютной и грациозной, как кошка, и такой же нужной, как самый главный человек в жизни своих близких. Ты — настоящее сокровище ❤️❤️❤️
+        </p>
+        <div class="cat-girl-badge" style="margin-top:18px;">
+          🐾 Кристина — самая любимая девушка-кошка 🐾
+        </div>
+        <p style="margin-top: 18px; font-family: 'Great Vibes'; font-size: 2.2rem; color: #b3446c;">
+          Ты важна всем, кто тебя знает ❤️
+        </p>
+        <span class="twinkle-star" style="bottom:8%; right:15%;">💫</span>
+      </div>
+
+      <div class="nav-arrows">
+        <div class="nav-arrow" id="prevArrow">←</div>
+        <div class="nav-arrow" id="nextArrow">→</div>
+      </div>
+    </div>
+
+    <div class="nav-dots" id="navDots">
+      <span class="nav-dot active" data-index="0"></span>
+      <span class="nav-dot" data-index="1"></span>
+      <span class="nav-dot" data-index="2"></span>
+      <span class="nav-dot" data-index="3"></span>
+      <span class="nav-dot" data-index="4"></span>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      function createBgParticles() {
+        const body = document.body;
+        const count = window.innerWidth < 768 ? 6 : 10;
+        for (let i = 0; i < count; i++) {
+          const particle = document.createElement('div');
+          particle.classList.add('bg-particle');
+          const size = Math.random() * 60 + 40;
+          particle.style.width = size + 'px';
+          particle.style.height = size + 'px';
+          particle.style.left = Math.random() * 90 + '%';
+          particle.style.top = Math.random() * 90 + '%';
+          particle.style.animationDelay = Math.random() * 8 + 's';
+          particle.style.animationDuration = (Math.random() * 8 + 8) + 's';
+          body.appendChild(particle);
+        }
+      }
+      createBgParticles();
+
+      const pages = document.querySelectorAll('.page');
+      const dots = document.querySelectorAll('.nav-dot');
+      const prevArrow = document.getElementById('prevArrow');
+      const nextArrow = document.getElementById('nextArrow');
+      let currentPage = 0;
+      const totalPages = pages.length;
+
+      function showPage(index) {
+        if (index < 0 || index >= totalPages) return;
+        pages.forEach((page, i) => {
+          page.classList.toggle('active', i === index);
+        });
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === index);
+        });
+        currentPage = index;
+        const activePage = pages[index];
+        if (activePage) {
+          activePage.scrollTop = 0;
+        }
+      }
+
+      prevArrow.addEventListener('click', () => showPage(currentPage - 1));
+      nextArrow.addEventListener('click', () => showPage(currentPage + 1));
+
+      dots.forEach(dot => {
+        dot.addEventListener('click', (e) => {
+          const index = parseInt(e.target.getAttribute('data-index'), 10);
+          if (!isNaN(index)) showPage(index);
+        });
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') showPage(currentPage + 1);
+        if (e.key === 'ArrowLeft') showPage(currentPage - 1);
+      });
+
+      let touchStartX = 0;
+      let touchStartY = 0;
+      const container = document.querySelector('.book');
+
+      container.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+      }, { passive: true });
+
+      container.addEventListener('touchend', (e) => {
+        if (!touchStartX) return;
+        const touchEndX = e.changedTouches[0].screenX;
+        const touchEndY = e.changedTouches[0].screenY;
+        const diffX = touchEndX - touchStartX;
+        const diffY = touchEndY - touchStartY;
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+          if (diffX < 0) {
+            showPage(currentPage + 1);
+          } else {
+            showPage(currentPage - 1);
+          }
+        }
+        touchStartX = 0;
+      });
+
+      const revealBlock = document.getElementById('secretMessage');
+      if (revealBlock) {
+        revealBlock.addEventListener('click', function(e) {
+          this.classList.toggle('touched');
+        });
+        revealBlock.addEventListener('touchstart', function(e) {
+          e.preventDefault();
+          this.classList.toggle('touched');
+        });
+      }
+
+      function setupPhotoPlaceholder(id, imagePath) {
+        const placeholder = document.getElementById(id);
+        if (!placeholder) return;
+        const img = placeholder.querySelector('img');
+        if (!img) return;
+        if (imagePath) {
+          img.src = imagePath;
+          img.style.display = 'block';
+          placeholder.classList.add('has-photo');
+          img.onload = function() {
+            console.log('✅ Фото загружено:', imagePath);
+          };
+          img.onerror = function() {
+            console.log('❌ Ошибка загрузки:', imagePath);
+            placeholder.classList.remove('has-photo');
+            img.style.display = 'none';
+          };
+        }
+      }
+
+      // ТРИ ФОТО — замени пути на свои
+      setupPhotoPlaceholder('photo1', 'img/kr1.jpg');  // страница 1 — обложка
+      setupPhotoPlaceholder('photo2', 'img/kr2.jpg');  // страница 3 — цитата Мэри Элис Янг
+      setupPhotoPlaceholder('photo3', 'img/kr3.jpg');  // страница 4 — литературная цитата о любви
+
+    })();
+  </script>
+</body>
+</html>
